@@ -132,6 +132,10 @@ static ARAnalytics *_sharedAnalytics;
     if (analyticsDictionary[ARCrittercismAppID]) {
         [self setupCrittercismWithAppID:analyticsDictionary[ARCrittercismAppID]];
     }
+    
+    if (analyticsDictionary[ARBugsenseAPIKey]) {
+        [self setupBugsenseWithAPIKey:analyticsDictionary[ARBugsenseAPIKey]];
+    }
 }
 
 + (void)setupProvider:(ARAnalyticalProvider*)provider {
@@ -304,6 +308,13 @@ static ARAnalytics *_sharedAnalytics;
 + (void)setupLibratoWithEmail:(NSString *)email token:(NSString *)token prefix:(NSString *)prefix {
 #ifdef AR_LIBRATO_EXISTS
     LibratoProvider *provider = [[LibratoProvider alloc] initWithEmail:email token:token prefix:prefix];
+    [self setupProvider:provider];
+#endif
+}
+
++ (void)setupBugsenseWithAPIKey:(NSString *)key {
+#ifdef AR_BUGSENSE_EXISTS
+    BugsenseProvider *provider = [[BugsenseProvider alloc] initWithIdentifier:key];
     [self setupProvider:provider];
 #endif
 }
@@ -514,3 +525,5 @@ const NSString *ARUMengAnalyticsID = @"ARUMengAnalyticsID";
 const NSString *ARLibratoEmail = @"ARLibratoEmail";
 const NSString *ARLibratoToken = @"ARLibratoToken";
 const NSString *ARLibratoPrefix = @"ARLibratoPrefix";
+const NSString *ARBugsenseAPIKey = @"ARBugsenseAPIKey";
+

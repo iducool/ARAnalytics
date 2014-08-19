@@ -86,3 +86,7 @@
 #ifdef AR_LIBRATO_EXISTS
 #import "LibratoProvider.h"
 #endif
+
+#ifdef AR_BUGSENSE_EXISTS
+#import "BugsenseProvider.h"
+#endif
