@@ -14,7 +14,7 @@
 
 - (id)initWithIdentifier:(NSString *)identifier
 {
-    NSAssert([BugSenseController class], @"TestFlight is not included");
+    NSAssert([BugSenseController class], @"Bugsense is not included");
     [BugSenseController sharedControllerWithBugSenseAPIKey:identifier];
     
     return [super init];
@@ -41,10 +41,16 @@
         checkpoint = event;
     }
     
+    //Please note that only premium account supports breadcrumbs.
+    
+    [BugSenseController sendCustomEventWithTag:checkpoint];
+    
     [BugSenseController leaveBreadcrumb:checkpoint];
 }
 
 - (void)remoteLog:(NSString *)parsedString {
     [BugSenseController leaveBreadcrumb:parsedString];
 }
+
+#endif
 @end
